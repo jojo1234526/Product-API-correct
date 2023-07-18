@@ -6,6 +6,7 @@ import projectforrevatureAPI.Correct.Model.Product;
 import projectforrevatureAPI.Correct.Repository.ProductRepository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -24,6 +25,14 @@ public class ProductService {
         }
         return products;
     }
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
 
+    public List<Product> getAllProductsSortedByPrice() {
+        List<Product> products = productRepository.findAll();
+        products.sort(Comparator.comparing(Product::getPrice));
+        return products;
+    }
 
 }
